@@ -2,6 +2,8 @@ import React from 'react';
 import {FiArrowRight} from 'react-icons/fi';
 import {Link} from 'react-router-dom';
 
+import logo from '../../assets/logo.svg';
+
 import '../styles/landing.css';
 
 const Landing: React.FC = () => {
@@ -9,7 +11,7 @@ const Landing: React.FC = () => {
     <div id="page-landing">
     <div className="content-wrapper">
       <div className="logo-landing-container">
-        <img src={require('../../assets/logo.svg')} alt="Happy"/>
+        <img src={logo} alt="Happy"/>
 
         <div className="location">
           <strong>Londrina</strong>

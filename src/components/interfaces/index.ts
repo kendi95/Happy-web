@@ -8,4 +8,10 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
+  onClick?: () => void;
+}
+
+export interface IRestrictedAccessProps {
+  to?: string;
+  isResetPasswordPage?: boolean;
 }

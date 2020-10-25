@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
 
+import mapIcon from '../../utils/mapIcon';
+
 import api from "../../services/api";
 import '../styles/create-orphanage.css';
 
@@ -92,7 +94,7 @@ const CreateOrphanage: React.FC = () => {
               />
 
               {position.latitude !== 0 && (
-                <Marker interactive={false} icon={require('../../utils/mapIcon')} position={[position.latitude, position.longitude]} />
+                <Marker interactive={false} icon={mapIcon} position={[position.latitude, position.longitude]} />
               )}
             </Map>
 

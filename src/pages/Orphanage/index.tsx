@@ -5,6 +5,9 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 import { useParams } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
+
+import mapIcon from '../../utils/mapIcon';
+
 import { IOrphanage, IOrphanageParams } from "../../interfaces";
 import api from "../../services/api";
 
@@ -71,7 +74,7 @@ const Orphanage: React.FC = () => {
                 <TileLayer 
                   url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
                 />
-                <Marker interactive={false} icon={require('../../utils/mapIcon')} position={[latiLongi.latitude, latiLongi.longitude]} />
+                <Marker interactive={false} icon={mapIcon} position={[latiLongi.latitude, latiLongi.longitude]} />
               </Map>
 
               <footer>

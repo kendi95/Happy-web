@@ -2,6 +2,8 @@ import React from  'react';
 import {FiArrowLeft} from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 
+import mapMarker from '../../assets/map-marker.svg';
+
 import '../styles/sidebar.css';
 
 const Sidebar: React.FC = () => {
@@ -9,7 +11,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <aside className="app-sidebar">
-        <img src={require('../../assets/map-marker.svg')} alt="Happy" />
+        <img src={mapMarker} alt="Happy" />
 
         <footer>
           <button type="button" onClick={goBack}>

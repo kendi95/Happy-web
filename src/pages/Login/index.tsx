@@ -31,7 +31,7 @@ const Login: React.FC = () => {
   }, []);
 
   return (
-    <RestrictedAccess>
+    <RestrictedAccess to="/">
       <form onSubmit={() => {}}>
         <h1>Fazer login</h1>
         <Input 

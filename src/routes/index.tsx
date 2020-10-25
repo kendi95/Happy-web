@@ -7,6 +7,8 @@ import CreateOrphanage from '../pages/CreateOrphanage';
 import Orphanage from '../pages/Orphanage';
 
 import Login from '../pages/Login';
+import ForgotPassword from '../pages/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword';
 
 const Routes: React.FC = () => {
   return (
@@ -19,6 +21,8 @@ const Routes: React.FC = () => {
         <Route path="/orphanages/:id" component={Orphanage} />
 
         <Route path="/login" component={Login} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset-password" component={ResetPassword} />
       </Switch>
     </BrowserRouter>
   );
