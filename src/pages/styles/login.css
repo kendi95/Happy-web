@@ -1,0 +1,79 @@
+form {
+  width: 100%;
+  padding: 80px;
+}
+
+form h1 {
+  font-size: 32px;
+  color: #5c8599;
+  font-weight: 700;
+
+  margin-bottom: 48px;
+}
+
+form .remember-forgot-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+form .remember-forgot-container a {
+  text-decoration: none;
+  color: #8fa7b2;
+  font-size: 18px;
+  font-weight: 600;
+
+  transition: color 0.2s;
+}
+
+form .remember-forgot-container a:hover {
+  color: #15c3d6;
+}
+
+form .remember-forgot-container .checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+form .remember-forgot-container .checkbox-container > input {
+  display: none;
+}
+
+form .remember-forgot-container .checkbox-container > input + label:before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  background: #f5f8fa;
+  border: 2px solid #d3e2e5;
+  margin-right: 16px;
+  padding: 8px;
+  display: inline-block;
+  vertical-align: middle;
+
+  transition: border 0.2s;
+}
+
+form
+  .remember-forgot-container
+  .checkbox-container
+  > input:hover
+  + label:before {
+  border: 2px solid #37c77f;
+}
+
+form
+  .remember-forgot-container
+  .checkbox-container
+  > input:checked
+  + label:before {
+  background: #37c77f;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23fff' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+}
+
+form .remember-forgot-container .checkbox-container > label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #8fa7b2;
+}

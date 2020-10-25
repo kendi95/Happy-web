@@ -2,22 +2,30 @@ import React from 'react';
 import {FiArrowRight} from 'react-icons/fi';
 import {Link} from 'react-router-dom';
 
-import '../../styles/pages/landing.css';
+import '../styles/landing.css';
 
 const Landing: React.FC = () => {
   return (
     <div id="page-landing">
     <div className="content-wrapper">
-      <img src={require('../../assets/logo.svg')} alt="Happy"/>
+      <div className="logo-landing-container">
+        <img src={require('../../assets/logo.svg')} alt="Happy"/>
+
+        <div className="location">
+          <strong>Londrina</strong>
+          <span>Paraná</span>
+        </div>
+      </div>
 
       <main>
         <h1>Leve felicidae para o mundo</h1>
         <p>Visite orfanatos e mude o dia de muitas crianças.</p>
       </main>
 
-      <div className="location">
-        <strong>Londrina</strong>
-        <span>Paraná</span>
+      <div className="restricted-access">
+        <Link to="/login">
+          <strong>Acesso restrito</strong>
+        </Link>
       </div>
 
       <Link to="/app" className="enter-app"> 

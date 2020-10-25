@@ -3,12 +3,12 @@ import {Link} from 'react-router-dom';
 import {FiPlus, FiArrowRight} from 'react-icons/fi';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 
-import '../../styles/pages/orphanages-map.css';
 import api from '../../services/api';
-import {Orphanage} from '../../interfaces';
+import {IOrphanage} from '../../interfaces';
+import '../styles/orphanages-map.css';
 
 const OrphanagesMap: React.FC = () => {
-  const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+  const [orphanages, setOrphanages] = useState<IOrphanage[]>([]);
 
   useEffect(() => {
     async function getOrphanages() {

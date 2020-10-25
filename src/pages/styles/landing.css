@@ -1,0 +1,126 @@
+#page-landing {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(329.54deg, #29b6d1 0%, #00c7c7 100%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-landing .content-wrapper {
+  position: relative;
+
+  width: 100%;
+  max-width: 1100px;
+
+  height: 100%;
+  max-height: 680px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+
+  background: url("../../assets/landing.svg") no-repeat 80% center;
+}
+
+#page-landing .content-wrapper main {
+  max-width: 350px;
+}
+
+#page-landing .content-wrapper main h1 {
+  font-size: 76px;
+  font-weight: 900;
+  line-height: 70px;
+}
+
+#page-landing .content-wrapper main p {
+  margin-top: 16px;
+  font-size: 24px;
+  line-height: 34px;
+}
+
+#page-landing .content-wrapper .restricted-access {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  font-size: 24px;
+  line-height: 24px;
+
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+#page-landing .content-wrapper .logo-landing-container {
+  width: 36%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#page-landing .content-wrapper .logo-landing-container .location {
+  font-size: 24px;
+  line-height: 20px;
+
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+#page-landing .content-wrapper .logo-landing-container .location strong {
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+#page-landing .content-wrapper .restricted-access a {
+  width: 222px;
+  height: 56px;
+  background: #12d4e0;
+  border-radius: 20px;
+  transition: background 0.2s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+#page-landing .content-wrapper .restricted-access a strong {
+  color: #fff;
+  font-size: 20px;
+  font-family: Nunito;
+  font-weight: 800;
+  transition: background 0.2s;
+}
+
+#page-landing .content-wrapper .restricted-access a:hover {
+  background: #96feff;
+}
+
+#page-landing .content-wrapper .restricted-access a:hover strong {
+  color: #15c3d6;
+}
+
+.content-wrapper .enter-app {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: 80px;
+  height: 80px;
+  background: #ffd666;
+  border-radius: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.content-wrapper .enter-app:hover {
+  background: #96feff;
+}

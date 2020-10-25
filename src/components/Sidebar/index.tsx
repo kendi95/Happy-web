@@ -2,7 +2,7 @@ import React from  'react';
 import {FiArrowLeft} from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 
-import '../../styles/components/sidebar.css';
+import '../styles/sidebar.css';
 
 const Sidebar: React.FC = () => {
   const {goBack} = useHistory();

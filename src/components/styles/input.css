@@ -1,0 +1,77 @@
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-group + .input-group {
+  margin-top: 24px;
+}
+
+.input-group label {
+  font-size: 16px;
+  color: #8fa7b2;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.input-group .input {
+  width: 100%;
+  height: 64px;
+  background: #f5f8fa;
+  border: 1px solid #d3e2e5;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  transition: border 0.1s;
+}
+
+.input-group .input input {
+  width: 100%;
+  height: 60px;
+  border: 0;
+  background: #f5f8fa;
+}
+
+.input-group .input input:focus {
+  outline: 0;
+}
+
+.input-group .input button {
+  background: transparent;
+  width: 10%;
+  height: 60px;
+  margin-top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.input-group .input button:focus {
+  outline: none;
+}
+
+.input-group .input button svg {
+  color: #8fa7b2;
+  transition: color 0.2s;
+}
+
+.input-group .input button svg:hover {
+  color: #15c3d6;
+}
+
+.input-group .input:hover {
+  border: 2px solid #15c3d6;
+}
+
+.input-group .input:focus {
+  outline: none;
+  border: 2px solid #15c3d6;
+}

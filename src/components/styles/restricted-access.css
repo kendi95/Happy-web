@@ -1,0 +1,71 @@
+#page-restricted-access {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+}
+
+#page-restricted-access .logo-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(329.54deg, #29b6d1 0%, #00c7c7 100%);
+  padding: 64px;
+}
+
+#page-restricted-access .logo-container img {
+  width: 260px;
+  height: 234px;
+  margin-bottom: 100px;
+}
+
+#page-restricted-access .logo-container strong {
+  font-weight: 800;
+  margin-bottom: 8px;
+  font-size: 32px;
+}
+
+#page-restricted-access .logo-container span {
+  font-size: 24px;
+}
+
+#page-restricted-access .form-container {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+}
+
+#page-restricted-access .form-container > a {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ebf2f5;
+  transition: background 0.2s;
+}
+
+#page-restricted-access .form-container > a svg {
+  color: #15c3d6;
+  transition: background 0.2s;
+}
+
+#page-restricted-access .form-container > a:hover {
+  background: #15c3d6;
+}
+
+#page-restricted-access .form-container > a:hover svg {
+  color: #fff;
+}

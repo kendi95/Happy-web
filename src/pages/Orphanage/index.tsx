@@ -5,14 +5,14 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 import { useParams } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
-import { Orphanage, OrphanageParams } from "../../interfaces";
+import { IOrphanage, IOrphanageParams } from "../../interfaces";
 import api from "../../services/api";
 
-import '../../styles/pages/orphanage.css';
+import '../styles/orphanage.css';
 
 const Orphanage: React.FC = () => {
-  const { id } = useParams<OrphanageParams>();
-  const [orphanage, setOrphanage] = useState<Orphanage>();
+  const { id } = useParams<IOrphanageParams>();
+  const [orphanage, setOrphanage] = useState<IOrphanage>();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const latiLongi = useMemo(() => {

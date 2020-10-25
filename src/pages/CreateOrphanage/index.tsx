@@ -4,9 +4,10 @@ import {LeafletMouseEvent} from 'leaflet';
 import { FiPlus } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 
-import '../../styles/pages/create-orphanage.css';
 import Sidebar from "../../components/Sidebar";
+
 import api from "../../services/api";
+import '../styles/create-orphanage.css';
 
 const CreateOrphanage: React.FC = () => {
   const history = useHistory();

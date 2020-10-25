@@ -6,6 +6,8 @@ import OrphanagesMap from '../pages/OrphanagesMap';
 import CreateOrphanage from '../pages/CreateOrphanage';
 import Orphanage from '../pages/Orphanage';
 
+import Login from '../pages/Login';
+
 const Routes: React.FC = () => {
   return (
     <BrowserRouter>
@@ -15,6 +17,8 @@ const Routes: React.FC = () => {
 
         <Route path="/orphanages/create" component={CreateOrphanage} />
         <Route path="/orphanages/:id" component={Orphanage} />
+
+        <Route path="/login" component={Login} />
       </Switch>
     </BrowserRouter>
   );
