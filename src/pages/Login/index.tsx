@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 
 import Input from '../../components/Input';
@@ -9,6 +9,7 @@ import RestrictedAccess from '../../components/RestrictedAccess';
 import '../styles/login.css';
 
 const Login: React.FC = () => {
+  const {push} = useHistory();
   const [checked, setChecked] = useState(false)
   const [inputType, setInputType] = useState('password');
   const [email, setEmail] = useState('');
@@ -29,6 +30,10 @@ const Login: React.FC = () => {
       return 'password';
     })
   }, []);
+
+  const handleLogin = useCallback(() => {
+    push('/dashboard/registered-orphanages');
+  }, [push]);
 
   return (
     <RestrictedAccess to="/">
@@ -65,7 +70,7 @@ const Login: React.FC = () => {
           <Link to="/forgot-password">Esqueci minha senha</Link>
         </div>
 
-        <Button label="Entrar" type="button" disabled={isDisabled} />
+        <Button label="Entrar" type="button" disabled={isDisabled} onClick={handleLogin} />
       </form>
     </RestrictedAccess>
   );

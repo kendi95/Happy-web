@@ -15,3 +15,11 @@ export interface IRestrictedAccessProps {
   to?: string;
   isResetPasswordPage?: boolean;
 }
+
+export interface ISidebarProps {
+  isDashboard?: boolean;
+}
+
+export interface ICardOrphanageProps {
+  isPending?: boolean;
+}
