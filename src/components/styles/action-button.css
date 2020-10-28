@@ -1,0 +1,47 @@
+.confirmation-button {
+  width: 50%;
+  height: 64px;
+  border-radius: 20px;
+  background: #15c3d6;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.confirmation-button:hover {
+  background: #35dcee;
+}
+
+.confirmation-button span {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cancel-button {
+  width: 50%;
+  height: 64px;
+  border-radius: 20px;
+  background: #d6487b;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancel-button:hover {
+  background: #e25387;
+}
+
+.cancel-button span {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+button + button {
+  margin-left: 16px;
+}
+
+button:focus {
+  outline: none;
+}

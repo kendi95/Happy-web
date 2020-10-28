@@ -39,7 +39,7 @@ const CardOrphanage: React.FC<ICardOrphanageProps> = ({isPending = false}) => {
               <Link to="" className="card-link-edit">
                 <FiEdit3 size={24} />
               </Link>
-              <Link to="" className="card-link-remove">
+              <Link to="/dashboard/exclude-orphanage" className="card-link-remove">
                 <FiTrash size={24} />
               </Link>
             </>

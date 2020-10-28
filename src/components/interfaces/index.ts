@@ -23,3 +23,10 @@ export interface ISidebarProps {
 export interface ICardOrphanageProps {
   isPending?: boolean;
 }
+
+export interface IActionButtonProps {
+  isConfirmation?: boolean;
+  text: string;
+  icon?: React.ReactNode
+  onClick: () => void;
+}
