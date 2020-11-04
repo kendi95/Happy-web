@@ -67,12 +67,11 @@ const CreateOrphanage: React.FC = () => {
 
 
       await api.post('/orphanages', formData);
-      alert('Cadastro realizado com sucesso.');
-      history.push('/app');
+      history.push('/orphanages/create/done');
     } catch (error) {
       alert('Houve um erro ao realizar o cadastro do orfanato.');
     }
-  }, [position, name, about, instructions, openOnWeekends, openHours, images, history]);
+  }, [about, history, images, instructions, name, openHours, openOnWeekends, position]);
 
   return (
     <div id="page-create-orphanage">

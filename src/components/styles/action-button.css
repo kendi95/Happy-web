@@ -38,6 +38,26 @@
   font-weight: 800;
 }
 
+.done-button {
+  width: 50%;
+  height: 64px;
+  border-radius: 20px;
+  background: #31b272;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.done-button:hover {
+  background: #3bd689;
+}
+
+.done-button span {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
 button + button {
   margin-left: 16px;
 }

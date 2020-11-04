@@ -26,6 +26,7 @@ export interface ICardOrphanageProps {
 
 export interface IActionButtonProps {
   isConfirmation?: boolean;
+  isDone?: boolean;
   text: string;
   icon?: React.ReactNode
   onClick: () => void;
