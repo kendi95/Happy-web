@@ -32,7 +32,7 @@ const Login: React.FC = () => {
   }, []);
 
   const handleLogin = useCallback(() => {
-    push('/dashboard/registered-orphanages');
+    push('/dashboard/orphanages');
   }, [push]);
 
   return (

@@ -15,6 +15,7 @@ const Sidebar: React.FC<ISidebarProps> = ({isDashboard = false}) => {
     const path = pathname.split('/')[2];
     return path;
   }, [pathname]);
+  console.log(route)
 
   const handleBackOrLogOut = useCallback(() => {
     if (!isDashboard) {

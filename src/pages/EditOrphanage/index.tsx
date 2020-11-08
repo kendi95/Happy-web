@@ -5,14 +5,14 @@ import { FiPlus } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
+import Input from "../../components/Input";
 
 import mapIcon from '../../utils/mapIcon';
 
 import api from "../../services/api";
-import '../styles/create-orphanage.css';
-import Input from "../../components/Input";
+import '../styles/edit-orphanage.css';
 
-const CreateOrphanage: React.FC = () => {
+const EditOrphanage: React.FC = () => {
   const history = useHistory();
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
@@ -76,14 +76,15 @@ const CreateOrphanage: React.FC = () => {
     }
   }, [about, history, images, instructions, name, openHours, openOnWeekends, position]);
 
+
   return (
-    <div id="page-create-orphanage">
+    <div id="page-edit-orphanage">
       <Sidebar />
 
       <main>
-        <span>Adicione um orfanato</span>
+        <span>Editar perfil de Orf. Esperança</span>
 
-        <form onSubmit={handleSubmit} className="create-orphanage-form">
+        <form onSubmit={handleSubmit} className="edit-orphanage-form">
           <fieldset>
             <legend>Dados</legend>
 
@@ -103,7 +104,7 @@ const CreateOrphanage: React.FC = () => {
             </Map>
 
             <div className="input-block">
-              <Input
+              <Input 
                 label="Nome" 
                 type="text" 
                 value={name} 
@@ -122,7 +123,7 @@ const CreateOrphanage: React.FC = () => {
             </div>
 
             <div className="input-block">
-              <Input
+              <Input 
                 label="Número de Whatsapp" 
                 type="text" 
                 value={whatsapp} 
@@ -192,5 +193,4 @@ const CreateOrphanage: React.FC = () => {
   );
 }
 
-export default CreateOrphanage
-// return `https://a.tile.openstreetmap.org/${z}/${x}/${y}.png`;
+export default EditOrphanage;

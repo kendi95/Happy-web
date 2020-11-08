@@ -13,6 +13,7 @@ import RegisteredOrphanages from '../pages/Dashboard/RegisteredOrphanages';
 import PendingOrphanages from '../pages/Dashboard/PendingOrphanages';
 import ExcludeOrphanage from '../pages/ExcludeOrphanage';
 import CreateDoneOrphanage from '../pages/CreateDoneOrphanage';
+import EditOrphanage from '../pages/EditOrphanage';
 
 const Routes: React.FC = () => {
   return (
@@ -29,10 +30,11 @@ const Routes: React.FC = () => {
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/reset-password" component={ResetPassword} />
 
-        <Route path="/dashboard/registered-orphanages" component={RegisteredOrphanages} />
-        <Route path="/dashboard/pending-orphanages" component={PendingOrphanages} />
+        <Route path="/dashboard/registered-orphanages"exact component={RegisteredOrphanages} />
+        <Route path="/dashboard/pending-orphanages" exact component={PendingOrphanages} />
 
-        <Route path="/dashboard/exclude-orphanage" component={ExcludeOrphanage} />
+        <Route path="/dashboard/exclude-orphanages" exact component={ExcludeOrphanage} />
+        <Route path="/dashboard/edit-orphanages" exact component={EditOrphanage} />
       </Switch>
     </BrowserRouter>
   );
