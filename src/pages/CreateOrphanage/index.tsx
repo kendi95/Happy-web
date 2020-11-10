@@ -1,17 +1,17 @@
 import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import {LeafletMouseEvent} from 'leaflet';
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiX } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
+import TextArea from "../../components/TextArea";
+import Input from "../../components/Input";
 
 import mapIcon from '../../utils/mapIcon';
 
 import api from "../../services/api";
 import '../styles/create-orphanage.css';
-import Input from "../../components/Input";
-import TextArea from "../../components/TextArea";
 
 const CreateOrphanage: React.FC = () => {
   const history = useHistory();
@@ -47,9 +47,19 @@ const CreateOrphanage: React.FC = () => {
       return URL.createObjectURL(image);
     })
 
-    setPreviewImages(selectedImagesPreview);
+    setPreviewImages(oldPreviewImages => [...oldPreviewImages, ...selectedImagesPreview]);
 
   }, []);
+
+  const handleDeleteImage = useCallback((positionIndex) => {
+    setPreviewImages(oldPreviewImages => {
+      return oldPreviewImages.splice(positionIndex, 1);
+    });
+
+    setImages(oldImages => {
+      return oldImages.splice(positionIndex, 1);
+    })
+  }, [])
 
   const handleSubmit = useCallback(async (event: FormEvent) => {
     event.preventDefault();
@@ -134,8 +144,13 @@ const CreateOrphanage: React.FC = () => {
               <label htmlFor="images">Fotos</label>
 
               <div className="images-container">
-                {previewImages.map(image => (
-                  <img src={image} key={image} alt={image} />
+                {previewImages.map((image, index) => (
+                  <div className="image">
+                    <img src={image} key={image} alt={image} />
+                    <button onClick={() => handleDeleteImage(index)} type="button">
+                      <FiX size={18} color="#FF669D" />
+                    </button>
+                  </div>
                 ))}
 
                 <label htmlFor="image[]" className="new-image">
