@@ -11,6 +11,7 @@ import mapIcon from '../../utils/mapIcon';
 import api from "../../services/api";
 import '../styles/create-orphanage.css';
 import Input from "../../components/Input";
+import TextArea from "../../components/TextArea";
 
 const CreateOrphanage: React.FC = () => {
   const history = useHistory();
@@ -102,33 +103,32 @@ const CreateOrphanage: React.FC = () => {
               )}
             </Map>
 
-            <div className="input-block">
-              <Input
-                label="Nome" 
-                type="text" 
-                value={name} 
-                onChange={e => setName(e.target.value)}
-              />
-            </div>
+            <Input
+              name="name"
+              label="Nome" 
+              type="text" 
+              value={name} 
+              onChange={e => setName(e.target.value)}
+            />
 
             <div className="input-block">
-              <label htmlFor="about">Sobre <span>Máximo de 300 caracteres</span></label>
-              <textarea 
-                id="about" 
+              <TextArea
+                name="about"
+                label="Sobre"
+                description="Máximo de 300 caracteres"
+                value={about}
                 maxLength={300} 
                 onChange={e => setAbout(e.target.value)} 
-                value={about}
               />
             </div>
 
-            <div className="input-block">
-              <Input
-                label="Número de Whatsapp" 
-                type="text" 
-                value={whatsapp} 
-                onChange={e => setWhatsapp(e.target.value)}
-              />
-            </div>
+            <Input
+              name="whatsapp"
+              label="Número de Whatsapp" 
+              type="text" 
+              value={whatsapp} 
+              onChange={e => setWhatsapp(e.target.value)}
+            />
 
             <div className="input-block">
               <label htmlFor="images">Fotos</label>
@@ -150,22 +150,22 @@ const CreateOrphanage: React.FC = () => {
             <legend>Visitação</legend>
 
             <div className="input-block">
-              <label htmlFor="instructions">Instruções</label>
-              <textarea 
-                id="instructions"
+              <TextArea
+                label="Instruções"
+                name="instructions"
+                maxLength={300}
+                value={instructions}
                 onChange={e => setInstructions(e.target.value)} 
-                value={instructions} 
               />
             </div>
 
-            <div className="input-block">
-              <label htmlFor="opening_hours">Horário de funcionamento</label>
-              <input 
-                id="opening_hours" 
-                onChange={e => setOpenHours(e.target.value)} 
-                value={openHours}
-              />
-            </div>
+            <Input
+              name="opening_hours"
+              label="Horário de funcionamento" 
+              type="text" 
+              value={openHours} 
+              onChange={e => setOpenHours(e.target.value)}
+            />
 
             <div className="input-block">
               <label htmlFor="open_on_weekends">Atende fim de semana</label>

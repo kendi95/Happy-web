@@ -2,10 +2,10 @@ import React, { useCallback, useMemo } from  'react';
 import {FiArrowLeft, FiMapPin, FiAlertCircle, FiPower} from 'react-icons/fi';
 import { useHistory, Link, useLocation } from 'react-router-dom';
 
+import {CustomAside} from '../styles';
+
 import mapMarker from '../../assets/map-marker.svg';
 import { ISidebarProps } from '../interfaces';
-
-import '../styles/sidebar.css';
 
 const Sidebar: React.FC<ISidebarProps> = ({isDashboard = false}) => {
   const {goBack, push} = useHistory();
@@ -15,7 +15,6 @@ const Sidebar: React.FC<ISidebarProps> = ({isDashboard = false}) => {
     const path = pathname.split('/')[2];
     return path;
   }, [pathname]);
-  console.log(route)
 
   const handleBackOrLogOut = useCallback(() => {
     if (!isDashboard) {
@@ -25,7 +24,7 @@ const Sidebar: React.FC<ISidebarProps> = ({isDashboard = false}) => {
   }, [isDashboard, goBack, push]);
 
   return (
-    <aside className="app-sidebar">
+    <CustomAside>
       <img src={mapMarker} alt="Happy" />
 
       {isDashboard ? (
@@ -58,7 +57,7 @@ const Sidebar: React.FC<ISidebarProps> = ({isDashboard = false}) => {
           )}
         </button>
       </footer>
-    </aside>
+    </CustomAside>
   );
 }
 

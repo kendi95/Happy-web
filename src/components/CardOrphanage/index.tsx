@@ -44,7 +44,7 @@ const CardOrphanage: React.FC<ICardOrphanageProps> = ({isPending = false}) => {
               </Link>
             </>
           ) : (
-            <Link to="" className="card-link-edit">
+            <Link to="/dashboard/pending-orphanages/1" className="card-link-edit">
               <FiArrowRight size={24} />
             </Link>
           )}

@@ -17,6 +17,7 @@ const ForgotPassword: React.FC = () => {
         <h1>Esqueci a senha</h1>
         <h3>Sua redefinição de senha será enviada para o e-mail cadastrado.</h3>
         <Input 
+          name="email"
           label="Email" 
           type="email" 
           value={email} 

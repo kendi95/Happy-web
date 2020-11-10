@@ -1,20 +1,20 @@
 import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import {LeafletMouseEvent} from 'leaflet';
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiXCircle, FiCheck } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
 import Input from "../../components/Input";
 import TextArea from "../../components/TextArea";
-// import {OrphanagePage} from '../styles';
+import ActionButton from "../../components/ActionButton";
 
 import mapIcon from '../../utils/mapIcon';
 
 import api from "../../services/api";
-import '../styles/edit-orphanage.css';
+import '../styles/orphanage-details.css';
 
-const EditOrphanage: React.FC = () => {
+const OrphanageDetails: React.FC = () => {
   const history = useHistory();
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
@@ -80,13 +80,13 @@ const EditOrphanage: React.FC = () => {
 
 
   return (
-    <div id="page-edit-orphanage">
+    <div id="page-detail-orphanage">
       <Sidebar />
 
       <main>
         <span>Editar perfil de Orf. Esperança</span>
 
-        <form onSubmit={handleSubmit} className="edit-orphanage-form">
+        <form onSubmit={handleSubmit} className="detail-orphanage-form">
           <fieldset>
             <legend>Dados</legend>
 
@@ -184,13 +184,23 @@ const EditOrphanage: React.FC = () => {
             </div>
           </fieldset>
 
-          <button className="confirm-button" type="submit">
-            Confirmar
-          </button>
+          <footer>
+            <ActionButton 
+              text="Não" 
+              icon={<FiXCircle size={20} color="#fff" />} 
+              onClick={() => {}} 
+            />
+            <ActionButton 
+              text="Sim" 
+              isDone
+              icon={<FiCheck size={20}color="#fff" />} 
+              onClick={() => {}}
+            />
+          </footer>
         </form>
       </main>
     </div>
   );
 }
 
-export default EditOrphanage;
+export default OrphanageDetails;

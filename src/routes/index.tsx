@@ -14,6 +14,7 @@ import PendingOrphanages from '../pages/Dashboard/PendingOrphanages';
 import ExcludeOrphanage from '../pages/ExcludeOrphanage';
 import CreateDoneOrphanage from '../pages/CreateDoneOrphanage';
 import EditOrphanage from '../pages/EditOrphanage';
+import OrphanageDetails from '../pages/OrphanageDetails';
 
 const Routes: React.FC = () => {
   return (
@@ -32,6 +33,7 @@ const Routes: React.FC = () => {
 
         <Route path="/dashboard/registered-orphanages"exact component={RegisteredOrphanages} />
         <Route path="/dashboard/pending-orphanages" exact component={PendingOrphanages} />
+        <Route path="/dashboard/pending-orphanages/:id" exact component={OrphanageDetails} />
 
         <Route path="/dashboard/exclude-orphanages" exact component={ExcludeOrphanage} />
         <Route path="/dashboard/edit-orphanages" exact component={EditOrphanage} />

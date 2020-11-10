@@ -32,7 +32,7 @@ const Login: React.FC = () => {
   }, []);
 
   const handleLogin = useCallback(() => {
-    push('/dashboard/orphanages');
+    push('/dashboard/registered-orphanages');
   }, [push]);
 
   return (
@@ -40,12 +40,14 @@ const Login: React.FC = () => {
       <form onSubmit={() => {}}>
         <h1>Fazer login</h1>
         <Input 
+          name="email"
           label="Email" 
           type="email" 
           value={email} 
           onChange={e => setEmail(e.target.value)}
         />
-        <Input 
+        <Input
+          name="password"
           label="Senha" 
           type={inputType} 
           maxLength={8} 

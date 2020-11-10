@@ -33,6 +33,7 @@ const ResetPassword: React.FC = () => {
         <h1>Redefinição de senha</h1>
         <h3>Escolha uma nova senha para você acessar o dashboard do Happy</h3>
         <Input 
+          name="new_password"
           label="Nova senha" 
           type={inputTypeNewPassword} 
           maxLength={8} 
@@ -42,6 +43,7 @@ const ResetPassword: React.FC = () => {
           onChange={e => setNewPassword(e.target.value)} 
         />
         <Input 
+          name="repeat_password"
           label="Repetir senha" 
           type={inputTypeRepeatassword} 
           maxLength={8} 
@@ -53,7 +55,7 @@ const ResetPassword: React.FC = () => {
 
         <Button label="Prosseguir" type="button" disabled={newPassword && repeatPassword ? false : true} />
       </form>
-      </RestrictedAccess>
+    </RestrictedAccess>
   )
 }
 

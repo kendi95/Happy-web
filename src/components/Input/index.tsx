@@ -2,16 +2,20 @@ import React from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 import { IInputProps } from '../interfaces';
+import {CustomInputContainer, CustomInput, CustomInputGroup} from '../styles';
 
-import '../styles/input.css';
-
-const Input: React.FC<IInputProps> = ({label, type, isPassword = false, onClick, value, onChange}) => {
+const Input: React.FC<IInputProps> = ({label, name, type, isPassword = false, onClick, value, onChange}) => {
 
   return (
-    <div className="input-group">
-      <label>{label}</label>
-      <div className="input">
-        <input type={type} onChange={onChange} value={value} />
+    <CustomInputGroup>
+      <label htmlFor={name}>{label}</label>
+      <CustomInputContainer hasValue={value ? true : false}>
+        <CustomInput 
+          id={name} 
+          type={type} 
+          onChange={onChange} 
+          value={value}
+        />
         {isPassword ? (
           <button type="button" onClick={onClick}>
             {type === 'password' ? (
@@ -21,8 +25,8 @@ const Input: React.FC<IInputProps> = ({label, type, isPassword = false, onClick,
             )}
           </button>
         ) : <div />}
-      </div>
-    </div>
+      </CustomInputContainer>
+    </CustomInputGroup>
   );
 }
 

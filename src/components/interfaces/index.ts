@@ -1,9 +1,24 @@
-import { ButtonHTMLAttributes, InputHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+
+export interface ICustomTextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  hasValue: boolean
+}
+
+export interface ICustomInputContainerProps {
+  hasValue: boolean
+}
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  name: string;
   isPassword?: boolean;
   onClick?: () => void
+}
+
+export interface ITextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label: string;
+  description?: string;
+  name: string;
 }
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
