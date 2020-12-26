@@ -12,6 +12,7 @@ export const ButtonStyled = styled.button`
   border-radius: 20px;
   margin-top: 40px;
   border: 0;
+  cursor: pointer;
 
   color: #fff;
   transition: background 0.2s;

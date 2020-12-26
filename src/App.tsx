@@ -1,4 +1,5 @@
 import React from 'react';
+import SnackbarProvider from 'react-simple-snackbar';
 
 import Routes from './routes';
 
@@ -7,7 +8,9 @@ import 'leaflet/dist/leaflet.css';
 
 function App() {
   return (
-    <Routes />
+    <SnackbarProvider>
+      <Routes />
+    </SnackbarProvider>
   );
 }
 

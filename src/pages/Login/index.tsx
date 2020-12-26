@@ -1,12 +1,15 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { FormEvent, useCallback, useMemo, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useSnackbar } from 'react-simple-snackbar';
+
+import api from '../../services/api';
+
 import Button from '../../components/Button';
-
 import Input from '../../components/Input';
-
 import RestrictedAccess from '../../components/RestrictedAccess';
 
 import '../styles/login.css';
+import {options} from './option';
 
 const Login: React.FC = () => {
   const {push} = useHistory();
@@ -14,6 +17,7 @@ const Login: React.FC = () => {
   const [inputType, setInputType] = useState('password');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [openSnackbar] = useSnackbar(options);
 
   const isDisabled = useMemo(() => {
     if (email && password) {
@@ -31,13 +35,28 @@ const Login: React.FC = () => {
     })
   }, []);
 
-  const handleLogin = useCallback(() => {
-    push('/dashboard/registered-orphanages');
-  }, [push]);
+  const handleLogin = useCallback(async (event: FormEvent) => {
+    event.preventDefault();
+    
+    try {
+      const response = await api.post('/sessions', {email, password});
+      const {user, token} = response.data
+      localStorage.setItem('@happy/token', token)
+      push('/dashboard/registered-orphanages');
+    } catch (error) {
+      if (error.response.data.errors instanceof Object) {
+        const {email, password} = error.response.data.errors;
+        openSnackbar(`${email || ''} ${password || ''}`);
+        return;
+      }
+      openSnackbar(`${error.response.data.errors}`);
+    }
+    
+  }, [openSnackbar, email, password, push]);
 
   return (
     <RestrictedAccess to="/">
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleLogin}>
         <h1>Fazer login</h1>
         <Input 
           name="email"
@@ -72,7 +91,7 @@ const Login: React.FC = () => {
           <Link to="/forgot-password">Esqueci minha senha</Link>
         </div>
 
-        <Button label="Entrar" type="button" disabled={isDisabled} onClick={handleLogin} />
+        <Button label="Entrar" type="submit" disabled={isDisabled} />
       </form>
     </RestrictedAccess>
   );
