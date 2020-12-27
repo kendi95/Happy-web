@@ -1,6 +1,6 @@
-import { TextareaHTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import { ICustomInputContainerProps, ICustomTextAreaProps } from '../interfaces';
+import InputMask from 'react-input-mask';
 
 export const CustomInputGroup = styled.div`
   width: 100%;
@@ -102,6 +102,16 @@ export const CustomInput = styled.input`
   border: 0;
 `;
 
+export const CustomInputMask = styled(InputMask)`
+  width: 100%;
+  height: 100%;
+  background: #f5f8fa;
+  border-radius: 20px;
+  outline: none;
+  color: #5c8599;
+  border: 0;
+`;
+
 export const CustomAside = styled.aside`
   position: fixed;
   height: 100%;
@@ -163,4 +173,21 @@ export const CustomAside = styled.aside`
   footer button:focus {
     outline: none;
   }
+`;
+
+export const Badge = styled.span`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  color: #12AFCB;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 60%;
+  bottom: 47%;
 `;

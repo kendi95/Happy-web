@@ -1,4 +1,6 @@
 import { ButtonHTMLAttributes, InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+import {Props} from 'react-input-mask';
+import { IOrphanage } from "../../interfaces";
 
 export interface ICustomTextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   hasValue: boolean
@@ -6,12 +8,14 @@ export interface ICustomTextAreaProps extends TextareaHTMLAttributes<HTMLTextAre
 
 export interface ICustomInputContainerProps {
   hasValue: boolean
+  hasError: boolean;
 }
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   name: string;
   isPassword?: boolean;
+  hasError?: boolean;
   onClick?: () => void
 }
 
@@ -37,6 +41,7 @@ export interface ISidebarProps {
 
 export interface ICardOrphanageProps {
   isPending?: boolean;
+  orphanage: IOrphanage;
 }
 
 export interface IActionButtonProps {
@@ -45,4 +50,9 @@ export interface IActionButtonProps {
   text: string;
   icon?: React.ReactNode
   onClick: () => void;
+}
+
+export interface IInputMaskProps extends Props{
+  label: string;
+  hasError?: boolean;
 }

@@ -39,6 +39,35 @@
   font-weight: 800;
 }
 
+#page-map aside a {
+  position: absolute;
+  top: 32px;
+  left: 12%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #ebf2f5;
+  transition: background 0.2s;
+}
+
+#page-map aside a svg {
+  color: #15c3d6;
+  transition: background 0.2s;
+}
+
+#page-map aside a:hover {
+  background: #15c3d6;
+}
+
+#page-map aside a:hover svg {
+  color: #fff;
+}
+
 #page-map .leaflet-container {
   z-index: 5;
 }

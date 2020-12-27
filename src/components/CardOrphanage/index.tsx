@@ -8,12 +8,12 @@ import { ICardOrphanageProps } from '../interfaces';
 
 import '../styles/card-orphanage.css';
 
-const CardOrphanage: React.FC<ICardOrphanageProps> = ({isPending = false}) => {
+const CardOrphanage: React.FC<ICardOrphanageProps> = ({isPending = false, orphanage}) => {
   return (
     <div className="card">
       <Map
         className="card-map" 
-        center={[-23.3184005, -51.1480857]} 
+        center={[orphanage.latitude, orphanage.longitude]} 
         zoom={16}
         dragging={false}
         touchZoom={false}
@@ -21,17 +21,17 @@ const CardOrphanage: React.FC<ICardOrphanageProps> = ({isPending = false}) => {
         scrollWheelZoom={false}
         doubleClickZoom={false}
         style={{
-        width: '100%',
-        height: '100%',
+          width: '100%',
+          height: '100%',
         }}
       >
         <TileLayer url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} />
         <Marker 
-          position={[-23.3184005, -51.1480857]} 
+          position={[orphanage.latitude, orphanage.longitude]} 
           icon={mapIcon} />
       </Map>
       <footer className="card-footer-container">
-        <h2>Orf. Esperança</h2>
+        <h2>{orphanage.name}</h2>
 
         <div className="card-footer">
           {!isPending ? (
@@ -44,7 +44,7 @@ const CardOrphanage: React.FC<ICardOrphanageProps> = ({isPending = false}) => {
               </Link>
             </>
           ) : (
-            <Link to="/dashboard/pending-orphanages/1" className="card-link-edit">
+            <Link to={`/dashboard/pending-orphanages/${orphanage.id}`} className="card-link-edit">
               <FiArrowRight size={24} />
             </Link>
           )}

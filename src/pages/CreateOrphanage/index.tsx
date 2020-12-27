@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import {LeafletMouseEvent} from 'leaflet';
 import { FiPlus, FiX } from "react-icons/fi";
@@ -12,8 +12,10 @@ import mapIcon from '../../utils/mapIcon';
 
 import api from "../../services/api";
 import '../styles/create-orphanage.css';
+import InputMask from "../../components/InputMask";
 
 const CreateOrphanage: React.FC = () => {
+  // revisar esse componente
   const history = useHistory();
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
@@ -25,6 +27,15 @@ const CreateOrphanage: React.FC = () => {
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [whatsapp, setWhatsapp] = useState('');
+  const [telephone, setTelephone] = useState('');
+  const [errors, setErrors] = useState({
+    name: false,
+    about: false,
+    instructions: false,
+    openHours: false,
+    whatsapp: false,
+    telephone: false
+  });
 
   const handleMapClick = useCallback((event: LeafletMouseEvent) => {
     const { lat, lng } = event.latlng;
@@ -75,6 +86,8 @@ const CreateOrphanage: React.FC = () => {
       formData.append('instructions', instructions);
       formData.append('open_on_weekends', String(openOnWeekends));
       formData.append('opening_hours', openHours);
+      formData.append('whatsapp', whatsapp);
+      formData.append('telephone', telephone);
       images.forEach(image => {
         formData.append('images', image);
       })
@@ -85,7 +98,28 @@ const CreateOrphanage: React.FC = () => {
     } catch (error) {
       alert('Houve um erro ao realizar o cadastro do orfanato.');
     }
-  }, [about, history, images, instructions, name, openHours, openOnWeekends, position]);
+  }, [
+    about, 
+    history, 
+    images, 
+    instructions, 
+    name, 
+    openHours, 
+    openOnWeekends, 
+    position, 
+    whatsapp, 
+    telephone
+  ]);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      const {longitude, latitude} = position.coords;
+      setPosition({
+        latitude,
+        longitude
+      });
+    });
+  }, []);
 
   return (
     <div id="page-create-orphanage">
@@ -117,8 +151,9 @@ const CreateOrphanage: React.FC = () => {
               name="name"
               label="Nome" 
               type="text" 
-              value={name} 
+              value={name}
               onChange={e => setName(e.target.value)}
+              hasError={errors.name}
             />
 
             <div className="input-block">
@@ -132,12 +167,20 @@ const CreateOrphanage: React.FC = () => {
               />
             </div>
 
-            <Input
-              name="whatsapp"
+            <InputMask 
+              mask="(99) 99999-9999"
               label="Número de Whatsapp" 
-              type="text" 
-              value={whatsapp} 
+              name="whatsapp"
+              value={whatsapp}
               onChange={e => setWhatsapp(e.target.value)}
+            />
+
+            <InputMask 
+              mask="(99) 9999-9999"
+              label="Número de telefone" 
+              name="telephone"
+              value={telephone}
+              onChange={e => setTelephone(e.target.value)}
             />
 
             <div className="input-block">
@@ -180,6 +223,7 @@ const CreateOrphanage: React.FC = () => {
               type="text" 
               value={openHours} 
               onChange={e => setOpenHours(e.target.value)}
+              hasError={errors.openHours}
             />
 
             <div className="input-block">

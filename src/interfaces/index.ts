@@ -8,10 +8,13 @@ export interface IOrphanage {
   name: string;
   latitude: number;
   longitude: number;
+  whatsapp: string;
+  telephone: string;
   about: string;
   instructions: string;
   opening_hours: string;
   open_on_weekends: boolean;
+  pending: boolean;
   images: IImage[];
 }
 

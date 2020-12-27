@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from  'react';
 import {Link} from 'react-router-dom';
-import {FiPlus, FiArrowRight} from 'react-icons/fi';
+import {FiPlus, FiArrowRight, FiArrowLeft} from 'react-icons/fi';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 
 import mapMarker from '../../assets/map-marker.svg';
@@ -37,6 +37,10 @@ const OrphanagesMap: React.FC = () => {
           <strong>Londrina</strong>
           <span>Paraná</span>
         </footer>
+
+        <Link to="/">
+          <FiArrowLeft size={24} />
+        </Link>
       </aside>
 
       <Map center={[-23.3184005, -51.1480857]} zoom={15} style={{
