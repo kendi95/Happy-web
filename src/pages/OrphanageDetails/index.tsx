@@ -1,21 +1,27 @@
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import {LeafletMouseEvent} from 'leaflet';
-import { FiPlus, FiXCircle, FiCheck } from "react-icons/fi";
-import { useHistory } from "react-router-dom";
+import { FiXCircle, FiCheck, FiX } from "react-icons/fi";
+import { useHistory, useParams } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
 import Input from "../../components/Input";
 import TextArea from "../../components/TextArea";
 import ActionButton from "../../components/ActionButton";
+import InputMask from "../../components/InputMask";
 
 import mapIcon from '../../utils/mapIcon';
-
 import api from "../../services/api";
+
+import { IOrphanageParams, IImage } from "../../interfaces";
+
 import '../styles/orphanage-details.css';
 
 const OrphanageDetails: React.FC = () => {
-  const history = useHistory();
+  const token = localStorage.getItem('@happy/token');
+
+  const {goBack} = useHistory();
+  const { id } = useParams<IOrphanageParams>();
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [name, setName] = useState('');
@@ -23,9 +29,9 @@ const OrphanageDetails: React.FC = () => {
   const [instructions, setInstructions] = useState('');
   const [openHours, setOpenHours] = useState('');
   const [openOnWeekends, setOpenOnWeekends] = useState(true);
-  const [images, setImages] = useState<File[]>([]);
-  const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [previewImages, setPreviewImages] = useState<IImage[]>([]);
   const [whatsapp, setWhatsapp] = useState('');
+  const [telephone, setTelephone] = useState('');
 
   const handleMapClick = useCallback((event: LeafletMouseEvent) => {
     const { lat, lng } = event.latlng;
@@ -33,65 +39,110 @@ const OrphanageDetails: React.FC = () => {
       latitude: lat,
       longitude: lng
     });
-  }, [])
-
-  const handleSelectedImages = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
-      return;
-    }
-
-    const selectedImages = Array.from(event.target.files)
-
-    setImages(selectedImages);
-
-    const selectedImagesPreview = selectedImages.map(image => {
-      return URL.createObjectURL(image);
-    })
-
-    setPreviewImages(selectedImagesPreview);
-
   }, []);
 
-  const handleSubmit = useCallback(async (event: FormEvent) => {
-    event.preventDefault();
-
+  const handleDeleteImage = useCallback(async (positionIndex, imageId) => {
     try {
-      const {latitude, longitude} = position;
-
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('about', about);
-      formData.append('latitude', String(latitude));
-      formData.append('longitude', String(longitude));
-      formData.append('instructions', instructions);
-      formData.append('open_on_weekends', String(openOnWeekends));
-      formData.append('opening_hours', openHours);
-      images.forEach(image => {
-        formData.append('images', image);
-      })
-
-
-      await api.post('/orphanages', formData);
-      history.push('/orphanages/create/done');
+      await api.delete(`/images/${imageId}`, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      });
+      
+      setPreviewImages(oldPreviewImages => {
+        const oldImages = oldPreviewImages.filter((_, index) => index !== positionIndex);
+        return oldImages;
+      });
     } catch (error) {
-      alert('Houve um erro ao realizar o cadastro do orfanato.');
+      console.log(error);
     }
-  }, [about, history, images, instructions, name, openHours, openOnWeekends, position]);
+  }, [token]);
 
+  const handleConfirmation = useCallback(async () => {
+    try {
+      await api.patch(`/orphanages/${id}`, {
+        status: 'CONFIRMED'
+      }, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      });
+      // push('/dashboard/pending-orphanages');
+      goBack();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id, goBack, token]);
+
+  const handleCancelation = useCallback(async () => {
+    try {
+      await api.patch(`/orphanages/${id}`, {
+        status: 'CANCELED'
+      }, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      });
+      // push('/dashboard/pending-orphanages');
+      goBack();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id, goBack, token]);
+
+  useEffect(() => {
+    async function getOrphanageById() {
+      try {
+        const response = await api.get(`/orphanages/${id}`, {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        const { 
+          name, 
+          latitude, 
+          longitude, 
+          about, 
+          telephone, 
+          whatsapp, 
+          images, 
+          instructions, 
+          opening_hours,
+          open_on_weekends
+        } = response.data;
+
+        setName(name);
+        setPosition({ latitude, longitude });
+        setAbout(about);
+        setTelephone(telephone);
+        setWhatsapp(whatsapp);
+        setInstructions(instructions);
+        setOpenHours(opening_hours);
+        setOpenOnWeekends(open_on_weekends);
+        setPreviewImages(images);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getOrphanageById()
+  }, [id, token]);
 
   return (
     <div id="page-detail-orphanage">
       <Sidebar />
 
       <main>
-        <span>Editar perfil de Orf. Esperança</span>
+        {name && (
+          <span>Confirmação de cadastro de {name}</span>
+        )}
 
-        <form onSubmit={handleSubmit} className="detail-orphanage-form">
+        <form className="detail-orphanage-form">
           <fieldset>
             <legend>Dados</legend>
 
             <Map 
-              center={[-27.2092052,-49.6401092]} 
+              center={[position.latitude, position.longitude]} 
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onclick={handleMapClick}
@@ -111,6 +162,7 @@ const OrphanageDetails: React.FC = () => {
               type="text" 
               value={name} 
               onChange={e => setName(e.target.value)}
+              readOnly
             />
 
             <div className="input-block">
@@ -121,31 +173,42 @@ const OrphanageDetails: React.FC = () => {
                 value={about}
                 maxLength={300} 
                 onChange={e => setAbout(e.target.value)} 
+                readOnly
               />
             </div>
 
-            <Input 
-              name="whatsapp"
+            <InputMask 
+              mask="(99) 99999-9999"
               label="Número de Whatsapp" 
-              type="text" 
-              value={whatsapp} 
+              name="whatsapp"
+              value={whatsapp}
               onChange={e => setWhatsapp(e.target.value)}
+              readOnly
+            />
+
+            <InputMask 
+              mask="(99) 9999-9999"
+              label="Número de telefone" 
+              name="telephone"
+              value={telephone}
+              onChange={e => setTelephone(e.target.value)}
+              readOnly
             />
 
             <div className="input-block">
               <label htmlFor="images">Fotos</label>
 
               <div className="images-container">
-                {previewImages.map(image => (
-                  <img src={image} key={image} alt={image} />
+                {previewImages.map((image, index) => (
+                  <div className="image">
+                    <img src={image.url} key={image.id} alt={image.url} />
+                    <button onClick={() => handleDeleteImage(index, image.id)} type="button">
+                      <FiX size={18} color="#FF669D" />
+                    </button>
+                  </div>
                 ))}
-
-                <label htmlFor="image[]" className="new-image">
-                  <FiPlus size={24} color="#15b6d6" />
-                </label>
               </div>
-              <input multiple onChange={handleSelectedImages} type="file" id="image[]" />
-             </div>
+            </div>
           </fieldset>
 
           <fieldset>
@@ -157,6 +220,7 @@ const OrphanageDetails: React.FC = () => {
                 label="Instruções"
                 value={instructions}
                 onChange={e => setInstructions(e.target.value)} 
+                readOnly
               />
             </div>
 
@@ -166,6 +230,7 @@ const OrphanageDetails: React.FC = () => {
               type="text" 
               value={openHours} 
               onChange={e => setOpenHours(e.target.value)}
+              readOnly
             />
 
             <div className="input-block">
@@ -186,15 +251,15 @@ const OrphanageDetails: React.FC = () => {
 
           <footer>
             <ActionButton 
-              text="Não" 
+              text="Recusar" 
               icon={<FiXCircle size={20} color="#fff" />} 
-              onClick={() => {}} 
+              onClick={handleCancelation} 
             />
             <ActionButton 
-              text="Sim" 
+              text="Aceitar" 
               isDone
               icon={<FiCheck size={20}color="#fff" />} 
-              onClick={() => {}}
+              onClick={handleConfirmation}
             />
           </footer>
         </form>

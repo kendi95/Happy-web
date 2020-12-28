@@ -38,7 +38,7 @@ const Sidebar: React.FC<ISidebarProps> = ({isDashboard = false}) => {
 
         const response = await api.get('/orphanages', {
           params: {
-            pending: true,
+            status: 'PENDING',
           },
           headers: {
             authorization: `Bearer ${token}`

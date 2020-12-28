@@ -18,7 +18,7 @@ const RegisteredOrphanages: React.FC = () => {
 
         const response = await api.get('/orphanages', {
           params: {
-            pending: false,
+            status: 'CONFIRMED',
           },
           headers: {
             authorization: `Bearer ${token}`

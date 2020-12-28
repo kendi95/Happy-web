@@ -9,7 +9,7 @@ const InputMask: React.FC<IInputMaskProps> = ({ name, label, value, hasError = f
     <CustomInputGroup>
       <label htmlFor={name}>{label}</label>
       <CustomInputContainer hasValue={value ? true : false} hasError={hasError}>
-        <CustomInputMask {...props} />
+        <CustomInputMask {...props} value={value} />
       </CustomInputContainer>
     </CustomInputGroup>
   )

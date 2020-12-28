@@ -33,7 +33,7 @@ const Routes: React.FC = () => {
 
         <Route path="/dashboard/registered-orphanages"exact component={RegisteredOrphanages} />
         <Route path="/dashboard/pending-orphanages" exact component={PendingOrphanages} />
-        <Route path="/dashboard/pending-orphanages/:id" exact component={OrphanageDetails} />
+        <Route path="/dashboard/pending-orphanages/:id" component={OrphanageDetails} />
 
         <Route path="/dashboard/exclude-orphanages" exact component={ExcludeOrphanage} />
         <Route path="/dashboard/edit-orphanages" exact component={EditOrphanage} />

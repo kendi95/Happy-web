@@ -122,6 +122,22 @@ form.detail-orphanage-form .input-block .images-container img {
   border-radius: 20px;
 }
 
+form.detail-orphanage-form .input-block .images-container .image button {
+  position: absolute;
+  margin-top: -102px;
+  margin-left: 54px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #d3e2e5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 0 20px;
+  cursor: pointer;
+}
+
 form.detail-orphanage-form .input-block input {
   display: none;
 }

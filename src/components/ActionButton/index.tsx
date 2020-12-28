@@ -25,7 +25,7 @@ const ActionButton: React.FC<IActionButtonProps> = ({
   return (
     <button onClick={onClick} className={buttonClassName}>
       {icon}
-      <span>{text}</span>
+      <span style={{color: '#fff'}}>{text}</span>
     </button>
   )
 }

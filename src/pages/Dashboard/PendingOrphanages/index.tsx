@@ -19,7 +19,7 @@ const PendingOrphanages: React.FC = () => {
 
         const response = await api.get('/orphanages', {
           params: {
-            pending: true
+            status: 'PENDING'
           },
           headers: {
             authorization: `Bearer ${token}`

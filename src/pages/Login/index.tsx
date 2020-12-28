@@ -68,9 +68,8 @@ const Login: React.FC = () => {
         <Input
           name="password"
           label="Senha" 
-          type={inputType} 
-          maxLength={8} 
-          isPassword 
+          type={inputType}
+          isPassword
           onClick={handleShowOrHidePassword} 
           value={password} 
           onChange={e => setPassword(e.target.value)} 

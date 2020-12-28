@@ -6,9 +6,9 @@
   justify-content: center;
 }
 
-.confirmation-button span,
-.cancel-button span,
-.done-button span {
+.confirmation-button > span,
+.cancel-button > span,
+.done-button > span {
   margin-left: 8px;
   color: #fff;
 }

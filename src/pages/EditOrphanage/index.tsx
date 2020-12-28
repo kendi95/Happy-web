@@ -1,21 +1,25 @@
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import {LeafletMouseEvent} from 'leaflet';
 import { FiPlus, FiX } from "react-icons/fi";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
 import Input from "../../components/Input";
 import TextArea from "../../components/TextArea";
+import InputMask from "../../components/InputMask";
 // import {OrphanagePage} from '../styles';
 
 import mapIcon from '../../utils/mapIcon';
-
 import api from "../../services/api";
+
+import {IOrphanage, IOrphanageParams} from '../../interfaces';
+
 import '../styles/edit-orphanage.css';
 
 const EditOrphanage: React.FC = () => {
   const history = useHistory();
+  const { id } = useParams<IOrphanageParams>();
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [name, setName] = useState('');
@@ -26,6 +30,7 @@ const EditOrphanage: React.FC = () => {
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [whatsapp, setWhatsapp] = useState('');
+  const [telephone, setTelephone] = useState('');
 
   const handleMapClick = useCallback((event: LeafletMouseEvent) => {
     const { lat, lng } = event.latlng;
@@ -88,20 +93,60 @@ const EditOrphanage: React.FC = () => {
     }
   }, [about, history, images, instructions, name, openHours, openOnWeekends, position]);
 
+  useEffect(() => {
+    async function getOrphanageById() {
+      try {
+        const token = localStorage.getItem('@happy/token');
+
+        const response = await api.get(`/orphanages/${id}`, {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        });
+        const { 
+          name, 
+          latitude, 
+          longitude, 
+          about, 
+          telephone, 
+          whatsapp, 
+          images, 
+          instructions, 
+          opening_hours,
+          open_on_weekends
+        } = response.data;
+
+        setName(name);
+        setPosition({ latitude, longitude });
+        setAbout(about);
+        setTelephone(telephone);
+        setWhatsapp(whatsapp);
+        setInstructions(instructions);
+        setOpenHours(opening_hours);
+        setOpenOnWeekends(open_on_weekends);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getOrphanageById()
+  }, [id]);
 
   return (
     <div id="page-edit-orphanage">
       <Sidebar />
 
       <main>
-        <span>Editar perfil de Orf. Esperança</span>
+        {name && (
+          <span>Editar perfil de {name}</span>
+        )}
 
         <form onSubmit={handleSubmit} className="edit-orphanage-form">
           <fieldset>
             <legend>Dados</legend>
 
             <Map 
-              center={[-27.2092052,-49.6401092]} 
+              center={[position.latitude, position.longitude]} 
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onclick={handleMapClick}
@@ -134,12 +179,20 @@ const EditOrphanage: React.FC = () => {
               />
             </div>
 
-            <Input 
-              name="whatsapp"
+            <InputMask 
+              mask="(99) 99999-9999"
               label="Número de Whatsapp" 
-              type="text" 
-              value={whatsapp} 
+              name="whatsapp"
+              value={whatsapp}
               onChange={e => setWhatsapp(e.target.value)}
+            />
+
+            <InputMask 
+              mask="(99) 9999-9999"
+              label="Número de telefone" 
+              name="telephone"
+              value={telephone}
+              onChange={e => setTelephone(e.target.value)}
             />
 
             <div className="input-block">
