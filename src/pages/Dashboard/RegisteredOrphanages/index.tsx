@@ -6,6 +6,7 @@ import { IOrphanage } from '../../../interfaces';
 import Sidebar from '../../../components/Sidebar';
 import CardOrphanage from '../../../components/CardOrphanage';
 
+import noContent from '../../../assets/no-content.svg';
 import '../../styles/Dashboard/registered-orphanages.css';
 
 const RegisteredOrphanages: React.FC = () => {
@@ -41,7 +42,9 @@ const RegisteredOrphanages: React.FC = () => {
       <section>
         <header>
           <h1>Orfanatos cadastrados</h1>
-          <span>{orphanages.length} orfanato{orphanages.length > 1 ? 's' : ''}</span>
+          {orphanages.length > 0 && (
+            <span>{orphanages.length} orfanato{orphanages.length > 1 ? 's' : ''}</span>
+          )}
         </header>
 
         <div className="devider" />
@@ -51,6 +54,13 @@ const RegisteredOrphanages: React.FC = () => {
             <CardOrphanage orphanage={orphanage} />
           </div>
         ))}
+
+        {orphanages.length === 0 && (
+          <div className="no-content-container">
+            <img src={noContent} alt="Sem conteúdo" />
+            <span>Nenhum no momento</span>
+          </div>
+        )}
       </section>
     </div>
   );

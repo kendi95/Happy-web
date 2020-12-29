@@ -7,6 +7,7 @@ import { IOrphanage } from '../../../interfaces';
 
 import api from '../../../services/api';
 
+import noContent from '../../../assets/no-content.svg';
 import '../../styles/Dashboard/pending-orphanages.css';
 
 const PendingOrphanages: React.FC = () => {
@@ -42,7 +43,9 @@ const PendingOrphanages: React.FC = () => {
       <section>
         <header>
           <h1>Cadastros pendentes</h1>
-          <span>{orphanages.length} orfanatos</span>
+          {orphanages.length > 0 && (
+            <span>{orphanages.length} orfanatos</span>
+          )}
         </header>
 
         <div className="devider" />
@@ -52,6 +55,13 @@ const PendingOrphanages: React.FC = () => {
             <CardOrphanage isPending orphanage={orphanage} />
           </div>
         ))}
+
+        {orphanages.length === 0 && (
+          <div className="no-content-container">
+            <img src={noContent} alt="Sem conteúdo" />
+            <span>Nenhum no momento</span>
+          </div>
+        )}
       </section>
     </div>
   );

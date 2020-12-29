@@ -50,3 +50,17 @@
   font-weight: 600;
   color: #8fa7b2;
 }
+
+.pending-dashboard section .no-content-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.pending-dashboard section .no-content-container > span {
+  color: #8fa7b2;
+  font-size: 24px;
+  margin-top: 16px;
+}
