@@ -36,10 +36,27 @@ const CardOrphanage: React.FC<ICardOrphanageProps> = ({isPending = false, orphan
         <div className="card-footer">
           {!isPending ? (
             <>
-              <Link to="/dashboard/edit-orphanages" className="card-link-edit">
+              <Link 
+                className="card-link-edit"
+                to={{
+                  pathname: "/dashboard/edit-orphanages",
+                  state: {
+                    id: orphanage.id,
+                  }
+                }}
+              >
                 <FiEdit3 size={24} />
               </Link>
-              <Link to="/dashboard/exclude-orphanages" className="card-link-remove">
+              <Link 
+                className="card-link-remove"
+                to={{
+                  pathname: "/dashboard/exclude-orphanages",
+                  state: {
+                    id: orphanage.id,
+                    name: orphanage.name
+                  }
+                }}
+              >
                 <FiTrash size={24} />
               </Link>
             </>

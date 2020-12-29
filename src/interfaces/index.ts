@@ -21,3 +21,8 @@ export interface IOrphanage {
 export interface IOrphanageParams {
   id: string;
 }
+
+export interface IExcludeOrphanageParams {
+  id: number;
+  name: string;
+}

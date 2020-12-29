@@ -1,9 +1,9 @@
 .confirmation-button,
 .cancel-button,
 .done-button {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .confirmation-button > span,

@@ -41,7 +41,7 @@ const RegisteredOrphanages: React.FC = () => {
       <section>
         <header>
           <h1>Orfanatos cadastrados</h1>
-          <span>2 orfanatos</span>
+          <span>{orphanages.length} orfanato{orphanages.length > 1 ? 's' : ''}</span>
         </header>
 
         <div className="devider" />
