@@ -9,7 +9,7 @@ import Input from '../../components/Input';
 import RestrictedAccess from '../../components/RestrictedAccess';
 
 import '../styles/login.css';
-import {options} from './option';
+import options from '../../utils/snackbarOptions';
 
 const Login: React.FC = () => {
   const {push} = useHistory();

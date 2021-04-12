@@ -2,7 +2,8 @@ import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import {LeafletMouseEvent} from 'leaflet';
 import { FiPlus, FiX } from "react-icons/fi";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useSnackbar } from 'react-simple-snackbar';
 
 import Sidebar from "../../components/Sidebar";
 import Input from "../../components/Input";
@@ -12,14 +13,17 @@ import InputMask from "../../components/InputMask";
 
 import mapIcon from '../../utils/mapIcon';
 import api from "../../services/api";
+import options from '../../utils/snackbarOptions';
 
-import {IOrphanage, IOrphanageParams} from '../../interfaces';
+import {IEditOrphanageParams} from '../../interfaces';
 
 import '../styles/edit-orphanage.css';
 
 const EditOrphanage: React.FC = () => {
-  const history = useHistory();
-  const { id } = useParams<IOrphanageParams>();
+  const {push, location} = useHistory();
+  const { id } = location.state as IEditOrphanageParams;
+
+  const [openSnackbar] = useSnackbar(options);
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [name, setName] = useState('');
@@ -71,27 +75,42 @@ const EditOrphanage: React.FC = () => {
     event.preventDefault();
 
     try {
+      const token = localStorage.getItem('@happy/token');
       const {latitude, longitude} = position;
 
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('about', about);
-      formData.append('latitude', String(latitude));
-      formData.append('longitude', String(longitude));
-      formData.append('instructions', instructions);
-      formData.append('open_on_weekends', String(openOnWeekends));
-      formData.append('opening_hours', openHours);
-      images.forEach(image => {
-        formData.append('images', image);
-      })
+      await api.put(`/orphanages/${id}`, {
+        name,
+        about,
+        latitude,
+        longitude,
+        whatsapp,
+        telephone,
+        instructions,
+        open_on_weekends: openOnWeekends,
+        opening_hours: openHours
+      }, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      });
 
-
-      await api.post('/orphanages', formData);
-      history.push('/orphanages/create/done');
+      push('/orphanages/create/done');
     } catch (error) {
-      alert('Houve um erro ao realizar o cadastro do orfanato.');
+      openSnackbar('Houve um erro ao atualizar o orfanato.')
     }
-  }, [about, history, images, instructions, name, openHours, openOnWeekends, position]);
+  }, [
+    openSnackbar,
+    about, 
+    push, 
+    instructions, 
+    whatsapp,
+    telephone,
+    name, 
+    openHours, 
+    openOnWeekends, 
+    position,
+    id
+  ]);
 
   useEffect(() => {
     async function getOrphanageById() {

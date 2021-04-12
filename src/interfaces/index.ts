@@ -18,11 +18,15 @@ export interface IOrphanage {
   images: IImage[];
 }
 
-export interface IOrphanageParams {
-  id: string;
-}
-
 export interface IExcludeOrphanageParams {
   id: number;
   name: string;
+}
+
+export interface IEditOrphanageParams {
+  id: number;
+}
+
+export interface IOrphanageParams {
+  id: string;
 }
